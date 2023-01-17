@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Owner;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class OwnersController extends Controller
 {
@@ -21,7 +24,17 @@ class OwnersController extends Controller
 
     public function index()
     {
-        dd('オーナー一覧');
+        $date_now = Carbon::now();
+        $date_parse = Carbon::parse();
+
+        echo $date_now;
+        echo "<br>";
+        echo $date_parse;
+
+        $e_all = Owner::all();
+        $q_get = DB::table('owners')->select('name', 'created_at')->get();
+        
+        return view('admin.owners.index', compact('e_all', 'q_get'));
     }
 
     /**
