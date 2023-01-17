@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +16,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('admins')->insert([
             'name' => 'たいせい',
-            'email' => 'test@test.com',
+            'email' => 'admin@admin.com',
             'password' => Hash::make('password123'),
-        ]);
+            'created_at' => '2023/1/1 11:11:11'
 
+        ]);
     }
 }

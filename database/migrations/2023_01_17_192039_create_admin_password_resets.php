@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrateCartsTable extends Migration
+class CreateAdminPasswordResets extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CrateCartsTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('carts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('stock_id');
-            $table->bigInteger('user_id');
-            $table->timestamps();
+        Schema::create('admin_password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -29,7 +27,6 @@ class CrateCartsTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('admin_password_resets');
     }
 }
