@@ -7,6 +7,8 @@ use App\Models\Owner;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class OwnersController extends Controller
 {
@@ -57,7 +59,14 @@ class OwnersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Owner::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('admin.owners.index');
     }
 
     /**
