@@ -12,7 +12,11 @@
 
                 <section class="text-gray-600 body-font">
                     <div class="container px-5 mx-auto">
-                       
+                        @if (session('message'))
+                        <div class="bg-indigo-400 text-white mx-auto w-1/4 py-2" >
+                         {{ session('message') }}
+                        </div>
+                    @endif
                       <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                         <div class="flex justify-end mb-4">
                                 
@@ -33,9 +37,8 @@
                               <td class="px-4 py-3">{{ $owner->name }}</td>
                               <td class="px-4 py-3">{{ $owner->email }}</td>
                               <td class="px-4 py-3">{{ $owner->created_at->diffForHumans() }}</td>
-                              <td class="w-10 text-center">
-                                <input name="plan" type="radio">
-                              </td>
+                              <td class="w-28">
+                                <button onclick="location.href='{{ route('admin.owners.edit', ['owner' => $owner->id ])}}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-500 rounded ">編集する</button>                                                      </td>
                             </tr>
                               @endforeach 
                           </tbody>
