@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 Route::resource('owners', OwnersController::class)->middleware('auth:admin');
 
-Route::prefix('expired-owners')
+Route::prefix('expired-owners') //prefixはrouteServiceProviderで指定してるadminが先頭に入ってる
 ->middleware('auth:admin')
 ->group(function(){
     Route::get('index', [OwnersController::class, 'expiredOwnerIndex'])->name('expired-owners.index');
