@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('admin.welcome');
-// });
+Route::get('/', function () {
+    return view('admin.welcome');
+});
 
 Route::resource('owners', OwnersController::class)
 ->middleware('auth:admin')
