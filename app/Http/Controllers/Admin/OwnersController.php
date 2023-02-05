@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Owner;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
+use Throwable;
 
 class OwnersController extends Controller
 {
@@ -61,11 +64,28 @@ class OwnersController extends Controller
     public function store(Request $request)
     {
 
-        Owner::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        try{
+            DB::transaction(function() use($request){//DBのtransactionでrequestを使うにはuse文を使用して読み込ませる必要がある
+                $owner = Owner::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+                
+                Shop::create([  //Owner情報が作成されたときに一緒にshopも作成する。
+                    'owner_id' => $owner->id,
+                    'name' => '店名を決めてください',
+                    'information' => '',
+                    'filename' => '',
+                    'is_selling' => true,
+                ]);
+        
+            }, 2);//第二引数で繰り返し回数を指定する
+
+        }catch(Throwable $e){
+             Log::error($e);
+             throw $e;
+        }
 
         return redirect()
         ->route('admin.owners.index')
