@@ -44,6 +44,6 @@ class Owner extends Authenticatable
 
     public function shop()
     {
-        return $this->hasOne(Shop::class);//一対一のリレーション
+        return $this->hasOne(Shop::class);//一対一のリレーション 参照先
     }
 }
