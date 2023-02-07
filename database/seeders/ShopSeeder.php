@@ -29,7 +29,7 @@ class ShopSeeder extends Seeder
                 'name' => '店名が入ります',
                 'information' => '店舗情報が入ります。店舗情報が入ります。店舗情報が入ります。',
                 'filename' => '',
-                'is_selling' => true,
+                'is_selling' => false,
                 'created_at' => '2023/1/1 11:11:11'
                 ], 
         ]);
