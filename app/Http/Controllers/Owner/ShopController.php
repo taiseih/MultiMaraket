@@ -8,6 +8,7 @@ use Facade\FlareClient\Truncation\TruncationStrategy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use InterventionImage;
 
 class ShopController extends Controller
 {
@@ -48,8 +49,14 @@ class ShopController extends Controller
     public function update(Request $request, $id)
     {
        $imageFile = $request->image;// formのnameが渡ってくる
-       if(!is_null($imageFile) && $imageFile->isValid()){
-            Storage::putFile('public/shops', $imageFile);
+       if(!is_null($imageFile) && $imageFile->isValid()){ //isValid()存在してるかどうか
+            // Storage::putFile('public/shops', $imageFile); リサイズ無しVer.
+            $fileName = uniqid(rand().'_'); //ランダムなidを生成
+            $extension = $imageFile->extension(); //保存された画像ファイルの拡張子を取得するメソッド
+            $fileNameStore = $fileName.'.'.$extension;
+            $resizedImage = InterventionImage::make($imageFile)->resize(1920,1080)->encode();//リサイズ
+
+            Storage::put('public/shops/' . $fileNameStore, $resizedImage);
        }
 
        return redirect()->route('owner.shops.index');
