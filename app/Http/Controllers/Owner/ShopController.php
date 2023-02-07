@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shop;
+use Facade\FlareClient\Truncation\TruncationStrategy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use InterventionImage;
+use App\Http\Requests\UploadImageRequest;
 
 class ShopController extends Controller
 {
@@ -37,12 +41,26 @@ class ShopController extends Controller
 
     public function edit($id)
     {
-        dd(Shop::findOrFail($id));
+        $shop = Shop::findOrFail($id);
+
+        return view('owner.shops.edit', compact('shop'));
+
     }
     
-    public function update(Request $request, $id)
+    public function update(UploadImageRequest $request, $id)
     {
+       $imageFile = $request->image;// formのnameが渡ってくる
+       if(!is_null($imageFile) && $imageFile->isValid()){ //isValid()存在してるかどうか
+            // Storage::putFile('public/shops', $imageFile); リサイズ無しVer.
+            $fileName = uniqid(rand().'_'); //ランダムなidを生成
+            $extension = $imageFile->extension(); //保存された画像ファイルの拡張子を取得するメソッド
+            $fileNameStore = $fileName.'.'.$extension;
+            $resizedImage = InterventionImage::make($imageFile)->resize(1920,1080)->encode();//リサイズ
 
+            Storage::put('public/shops/' . $fileNameStore, $resizedImage);
+       }
+
+       return redirect()->route('owner.shops.index');
     }
 
 
