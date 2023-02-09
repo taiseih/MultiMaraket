@@ -54,7 +54,8 @@ class ShopController extends Controller
             // Storage::putFile('public/shops', $imageFile); リサイズ無しVer.
             $fileName = uniqid(rand().'_'); //ランダムなidを生成
             $extension = $imageFile->extension(); //保存された画像ファイルの拡張子を取得するメソッド
-            $fileNameStore = $fileName.'.'.$extension;
+            $fileNameStore = $fileName.'.'.$extension;//ファイル名＋拡張子
+
             $resizedImage = InterventionImage::make($imageFile)->resize(1920,1080)->encode();//リサイズ
 
             Storage::put('public/shops/' . $fileNameStore, $resizedImage);
@@ -65,7 +66,7 @@ class ShopController extends Controller
        $shop->information = $request->information;
        $shop->is_selling = $request->is_selling;
        if(!is_null($imageFile) && $imageFile->isValid()){
-            $shop->filename = $fileNameStore;
+            $shop->filename = $fileNameStore;//DBに保存するのはファイル名のみ
        }
 
        $shop->save();
