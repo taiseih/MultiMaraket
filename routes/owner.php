@@ -43,7 +43,7 @@ Route::resource('images', ImageController::class)
 ->middleware('auth:owners')
 ->except(['show']);//exceptは指定したメソッドを使わないという意味
 
-Route::resource('product', ProductController::class)
+Route::resource('products', ProductController::class)
 ->middleware('auth:owners')
 ->except(['show']);
 
