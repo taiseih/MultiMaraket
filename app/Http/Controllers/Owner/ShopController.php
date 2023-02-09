@@ -60,7 +60,17 @@ class ShopController extends Controller
             Storage::put('public/shops/' . $fileNameStore, $resizedImage);
        }
 
-       return redirect()->route('owner.shops.index');
+       $shop = Shop::findOrFail($id);
+       $shop->name = $request->name;
+       $shop->information = $request->information;
+       $shop->is_selling = $request->is_selling;
+       if(!is_null($imageFile) && $imageFile->isValid()){
+            $shop->filename = $fileNameStore;
+       }
+
+       $shop->save();
+
+       return redirect()->route('owner.shops.index')->with('shopUpdate', 'ショップ情報を更新しました');
     }
 
 
