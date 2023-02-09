@@ -10,12 +10,16 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @if (session('imageStore'))
-                    <div class="bg-indigo-400 text-white mx-auto w-1/4 py-2" >
+                    <div class="bg-indigo-400 text-center text-white mx-auto w-1/4 py-2" >
                         {{ session('imageStore') }}
                        </div>
                        @elseif (session('imageUpdate'))
-                       <div class="bg-green-400 text-white mx-auto w-1/4 py-2" >
+                       <div class="bg-green-400 text-center text-white mx-auto w-1/4 py-2" >
                         {{ session('imageUpdate') }}
+                       </div>
+                       @elseif (session('alert'))
+                       <div class="bg-red-400 text-center text-white mx-auto w-1/4 py-2" >
+                        {{ session('alert') }}
                        </div>
                     @endif
 

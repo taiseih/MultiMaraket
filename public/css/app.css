@@ -758,9 +758,6 @@ select {
 .inline-flex {
   display: inline-flex;
 }
-.flex-wrap{
-  flex-wrap: wrap;
-}
 .table {
   display: table;
 }
@@ -833,6 +830,9 @@ select {
 .w-6 {
   width: 1.5rem;
 }
+.w-24 {
+  width: 6rem;
+}
 .w-48 {
   width: 12rem;
 }
@@ -893,6 +893,9 @@ select {
 }
 .flex-col {
   flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
 .items-center {
   align-items: center;
@@ -1611,6 +1614,10 @@ select {
 
   .md\:border-l {
     border-left-width: 1px;
+  }
+
+  .md\:p-4 {
+    padding: 1rem;
   }
 
   .md\:p-6 {
