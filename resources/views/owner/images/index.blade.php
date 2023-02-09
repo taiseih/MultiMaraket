@@ -13,6 +13,10 @@
                     <div class="bg-indigo-400 text-white mx-auto w-1/4 py-2" >
                         {{ session('imageStore') }}
                        </div>
+                       @elseif (session('imageUpdate'))
+                       <div class="bg-green-400 text-white mx-auto w-1/4 py-2" >
+                        {{ session('imageUpdate') }}
+                       </div>
                     @endif
 
                     <div class="flex justify-end mb-4">
@@ -25,14 +29,14 @@
                     <div class="w-1/4 p-2 md:p-4">
                             <a href="{{ route('owner.images.edit', ['image' => $image->id]) }}">
                                 <div class="border rounded-md:p-4">
-                                    <div class="text-xl">
-                                        {{ $image->title }}
-                                    </div>
                                         @if (empty($image->filename))
                                             <img src="{{ asset('images/no-image.png') }}">
                                         @else
                                             <img src="{{ asset('storage/products/'. $image->filename) }}">
                                     @endif
+                                </div>
+                                <div class="text-gray-700">
+                                    {{ $image->title }}
                                 </div>
                             </a>
                         </div>
