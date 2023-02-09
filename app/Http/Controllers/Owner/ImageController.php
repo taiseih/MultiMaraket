@@ -7,6 +7,8 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UploadImageRequest;
+use Illuminate\Support\Facades\Storage;
+use InterventionImage;
 
 class ImageController extends Controller
 {
@@ -37,7 +39,7 @@ class ImageController extends Controller
     public function index()
     {
         //
-        $images = Image::where('owner_id', Auth::id())->orderBy('updated', 'desc')->paginate(20);
+        $images = Image::where('owner_id', Auth::id())->orderBy('updated_at', 'desc')->paginate(20);
         return view('owner.images.index', compact('images'));
     }
 
@@ -60,7 +62,24 @@ class ImageController extends Controller
     public function store(UploadImageRequest $request)
     {
         //
-        dd($request);
+
+        $imageFiles = $request->file('files');
+        if(!is_null($imageFiles)){
+            foreach($imageFiles as $imageFile){
+                $fileName = uniqid(rand().'_'); 
+                $file = $imageFile['image'];//元の配列のままだと使えないのでキーを指定してる
+            $extension = $file->extension(); 
+            $fileNameStore = $fileName.'.'.$extension;
+            $resizedImage = InterventionImage::make($file)->resize(1920,1080)->encode();
+            Storage::put('public/products/' . $fileNameStore, $resizedImage);
+            Image::create([
+                'owner_id' => Auth::id(),
+                'filename' => $fileNameStore,
+            ]);
+            }
+            return redirect()->route('owner.images.index')->with('imageStore', '画像を登録しました');
+
+        }
     }
 
     /**

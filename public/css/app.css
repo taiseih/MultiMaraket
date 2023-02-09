@@ -758,6 +758,9 @@ select {
 .inline-flex {
   display: inline-flex;
 }
+.flex-wrap{
+  flex-wrap: wrap;
+}
 .table {
   display: table;
 }

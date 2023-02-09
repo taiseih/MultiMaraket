@@ -17,6 +17,6 @@ class Image extends Model
 
     public function owner()
     {
-        return $this->belongsTo(Owner::class);//一対一のリレーション 参照元
+        return $this->belongsTo(Owner::class);
     }
 }
