@@ -805,6 +805,9 @@ select{
 .mr-2{
   margin-right: 0.5rem;
 }
+.mr-auto{
+  margin-right: auto;
+}
 .ml-2{
   margin-left: 0.5rem;
 }
