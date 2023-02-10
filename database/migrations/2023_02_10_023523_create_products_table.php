@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('information');
             $table->unsignedInteger('price');
+            $table->boolean('is_selling');
             $table->integer('sort_order')->nullable();
             $table->foreignId('shop_id')
             ->constrained()
