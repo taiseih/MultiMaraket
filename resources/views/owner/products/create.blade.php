@@ -31,6 +31,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <x-select-image name="image1" />
                                     </div>
                                 </div>
                                 <div class="p-2 w-full flex justify-around mt-4">
