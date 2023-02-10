@@ -61,8 +61,10 @@
         const modal = e.target.dataset.modal
         document.getElementById(imageName + '_thumbnail').src = imagePath + '/' + imageFile
         document.getElementById(imageName + '_hidden').value = imageId
-        MicroModal.close(modal);
+        // MicroModal.close(modal);
+        document.getElementById(modal + '_close').click()
     }, )
-    })  
+    })
+    // document.getElementById(modal + '_close').click();  
     </script>
 </x-app-layout>
