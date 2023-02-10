@@ -33,12 +33,12 @@
                 </div>
         </main>
         <footer class="modal__footer">
-          <button type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+          <button type="button" class="modal__btn" id="{{ $modal }}_close" data-micromodal-close aria-label="Close this dialog window">Close</button>
         </footer>
       </div>
     </div>
   </div>
-<div class="flex justify-around items-center mb4">
+<div class="flex justify-around items-center mb-4">
   <a href="javascript:;" data-micromodal-trigger="{{ $modal }}">ファイル選択</a>
   <div class="w-1/2">
     <img id="{{ $name }}_thumbnail" src="">
