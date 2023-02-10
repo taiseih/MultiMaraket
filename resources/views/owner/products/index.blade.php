@@ -21,6 +21,10 @@
                        <div class="bg-red-400 text-center text-white mx-auto w-1/4 py-2" >
                         {{ session('alert') }}
                        </div>
+                        @elseif (session('message'))
+                       <div class="bg-indigo-400 text-center text-white mx-auto w-1/4 py-2" >
+                        {{ session('message') }}
+                       </div>
                     @endif
 
                     <div class="flex justify-end mb-4">
@@ -34,7 +38,7 @@
                     <div class="w-1/4 p-2 md:p-4">
                             <a href="{{ route('owner.products.edit', ['product' => $product->id]) }}">
                                 <div class="border rounded-md:p-4">
-                                        @if (empty($product->imageFirst->filename))
+                                        @if (empty($product->imageFirst->filename ?? ''))
                                             <img src="{{ asset('images/no-image.png') }}">
                                         @else
                                             <img src="{{ asset('storage/products/'. $product->imageFirst->filename) }}">
