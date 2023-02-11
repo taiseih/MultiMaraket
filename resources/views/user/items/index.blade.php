@@ -12,15 +12,15 @@
                     @foreach ($products as $product)
                     <div class="w-1/4 p-2 md:p-4">
                                 <div class="border rounded-md:p-4">
-                                        @if (empty($product->imageFirst->filename ?? ''))
+                                        @if (empty($product->filename ?? ''))
                                             <img src="{{ asset('images/no-image.png') }}">
                                         @else
-                                            <img src="{{ asset('storage/products/'. $product->imageFirst->filename) }}">
+                                            <img src="{{ asset('storage/products/'. $product->filename) }}">
                                     @endif
                                 </div>
                                      <div class="p-6">
                                         {{-- $productのcategoryはProductモデルのcategoryメソッドから取得 --}}
-                                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $product->category->name }}</h2>
+                                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $product->category }}</h2>
                                         <h1 class="title-font text-lg font-medium text-gray-700 mb-3">{{$product->name}}</h1>
                                         <p class="leading-relaxed mb-3 text-gray-700 text-sm">{{number_format($product->price).'円（税込）'}}</p>
                                         <div class="flex items-center flex-wrap">
