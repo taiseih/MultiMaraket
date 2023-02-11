@@ -168,6 +168,10 @@
 .micromodal-slide .modal__overlay {
     will-change: transform;
 }
+.swiper-container {
+    /* width: 600px; */
+    height: 300px;
+}
 /*
 ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
 */
@@ -868,9 +872,6 @@ select{
 .h-5{
   height: 1.25rem;
 }
-.h-64{
-  height: 16rem;
-}
 .h-8{
   height: 2rem;
 }
@@ -888,6 +889,9 @@ select{
 }
 .h-20{
   height: 5rem;
+}
+.h-64{
+  height: 16rem;
 }
 .min-h-screen{
   min-height: 100vh;
