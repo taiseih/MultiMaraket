@@ -7,6 +7,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UploadImageRequest;
+use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use InterventionImage;
 class ImageController extends Controller
@@ -120,18 +121,38 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-
         $image = Image::findOrFail($id);
-        $filePath = 'public/products/' . $image->filename;
 
-        if(Storage::exists($filePath)){
-            Storage::delete($filePath);
+        $imageInProducts = Product::where('image1', $image->id)
+            ->orWhere('image2', $image->id)
+            ->orWhere('image3', $image->id)
+            ->orWhere('image4', $image->id)
+            ->get();
+
+        $deleteImage = true;//初期値はtrue
+
+        if (!is_null($imageInProducts)) {
+            $imageInProducts->each(function ($product) use ($image, &$deleteImage) {
+                for ($i = 1; $i <= 4; $i++) {
+                    if ($product->{"image{$i}"} === $image->id) {
+                        $deleteImage = false;
+                        break;
+                    }
+                }
+            });
+
+            if (!$deleteImage) {
+                return redirect()->route('owner.images.index')->with('alert', '商品情報が残っています。');
+            }
         }
+
+        $filePath = 'public/products/' . $image->filename;
+        Storage::delete($filePath);
 
         Image::findOrFail($id)->delete();
 
         return redirect()
-        ->route('owner.images.index')
-        ->with('alert', '画像を削除しました');
+            ->route('owner.images.index')
+            ->with('alert', '画像を削除しました');
     }
 }
