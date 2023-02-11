@@ -11,7 +11,6 @@
                     <div class="flex flex-wrap">
                     @foreach ($products as $product)
                     <div class="w-1/4 p-2 md:p-4">
-                            <a href="">
                                 <div class="border rounded-md:p-4">
                                         @if (empty($product->imageFirst->filename ?? ''))
                                             <img src="{{ asset('images/no-image.png') }}">
@@ -19,10 +18,15 @@
                                             <img src="{{ asset('storage/products/'. $product->imageFirst->filename) }}">
                                     @endif
                                 </div>
-                                <div class="text-gray-700">
-                                    {{ $product->name }}
-                                </div>
-                            </a>
+                                     <div class="p-6">
+                                        {{-- $productのcategoryはProductモデルのcategoryメソッドから取得 --}}
+                                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $product->category->name }}</h2>
+                                        <h1 class="title-font text-lg font-medium text-gray-700 mb-3">{{$product->name}}</h1>
+                                        <p class="leading-relaxed mb-3 text-gray-700 text-sm">{{number_format($product->price).'円（税込）'}}</p>
+                                        <div class="flex items-center flex-wrap">
+                                        <a href="{{}}" class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">もっとみる</a>
+                                        </div>
+                                     </div>
                         </div>
                         @endforeach
                 </div>
