@@ -44,9 +44,9 @@
                                             <img src="{{ asset('storage/products/'. $product->imageFirst->filename) }}">
                                     @endif
                                 </div>
-                                {{-- <div class="text-gray-700">
+                                <div class="text-gray-700">
                                     {{ $product->name }}
-                                </div> --}}
+                                </div>
                             </a>
                         </div>
                         @endforeach

@@ -186,7 +186,7 @@ class ProductController extends Controller
     {
          Product::findOrFail($id)->delete();
 
-        return redirect()
+            return redirect()
             ->route('owner.products.index')
             ->with('alert', '商品を削除しました');
     }
