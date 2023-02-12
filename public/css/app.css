@@ -908,6 +908,9 @@ select{
 .w-full{
   width: 100%;
 }
+.w-max {
+  width: max-content;
+}
 .w-1\/2{
   width: 50%;
 }
@@ -1721,7 +1724,13 @@ select{
     line-height: 2.25rem;
   }
 }
-@media (min-width: 768px){
+@media (min-width: 768px) {
+  .md\:items-center {
+    align-items: center;
+  }
+  .md\:w-3\/12 {
+    width: 25%;
+  }
   .md\:mb-2{
     margin-bottom: 0.5rem;
   }
