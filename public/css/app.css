@@ -890,6 +890,9 @@ select{
 .h-20{
   height: 5rem;
 }
+.h-40{
+  height: 10rem;
+}
 .h-64{
   height: 16rem;
 }
@@ -934,6 +937,9 @@ select{
 }
 .w-32{
   width: 8rem;
+}
+.w-40{
+  width: 10rem;
 }
 .w-48{
   width: 12rem;
@@ -1041,6 +1047,9 @@ select{
 .rounded{
   border-radius: 0.25rem;
 }
+.rounded-full{
+  border-radius: 9999px;
+}
 .rounded-lg{
   border-radius: 0.5rem;
 }
@@ -1135,6 +1144,9 @@ select{
 .bg-gray-200{
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+.bg-gray-500{
+  background-color: rgb(107 114 128);
 }
 .bg-gray-800{
   --tw-bg-opacity: 1;

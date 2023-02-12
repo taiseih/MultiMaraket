@@ -18,20 +18,20 @@ class ShopSeeder extends Seeder
         DB::table('shops')->insert([
             [
                 'owner_id' => 1,
-                'name' => '店名が入ります',
+                'name' => 'オーナー1のショップ名です',
                 'information' => '店舗情報が入ります。店舗情報が入ります。店舗情報が入ります。',
-                'filename' => '',
+                'filename' => 'sample1.jpg',
                 'is_selling' => true,
                 'created_at' => '2023/1/1 11:11:11'
             ],
             [
                 'owner_id' => 2,
-                'name' => '店名が入ります',
+                'name' => 'オーナー2のショップ名です',
                 'information' => '店舗情報が入ります。店舗情報が入ります。店舗情報が入ります。',
-                'filename' => '',
+                'filename' => 'sample2.jpg',
                 'is_selling' => false,
                 'created_at' => '2023/1/1 11:11:11'
-                ], 
+            ],
         ]);
     }
 }
