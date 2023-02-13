@@ -17,7 +17,7 @@ class CartController extends Controller
         $totalPrice = 0;
 
         foreach($products as $product){
-            $totalPrice = $product->price * $product->pivot->quantity;//pivotで中間テーブルのcartsの数量を取得
+            $totalPrice += $product->price * $product->pivot->quantity;//pivotで中間テーブルのcartsの数量を取得
         }
         return view('user.cart', compact('totalPrice', 'products'));
     }
@@ -57,12 +57,17 @@ class CartController extends Controller
 
             if($product->pivot->quantity > $quantities){
                 return redirect()->route('user.cart.index');
-            }else{
+            } else {
                 $lineItem = [
-                    'name' => $product->name,
-                    'description' => $product->information,
-                    'amount' => $product->price,
-                    'currency' => 'jpy',
+                    'price_data' => [
+                        'unit_amount' => $product->price,
+                        'currency' => 'JPY',
+
+                        'product_data' => [
+                            'name' => $product->name,
+                            'description' => $product->information,
+                        ],
+                    ],
                     'quantity' => $product->pivot->quantity,
                 ];
                 array_push($lineItems, $lineItem);
@@ -74,8 +79,6 @@ class CartController extends Controller
                     'type' => 2,
                     'quantity' => $product->pivot->quantity * -1
                 ]);
-
-                dd('test');
             }
             
         }
@@ -89,8 +92,8 @@ class CartController extends Controller
             'cancel_url' => route('user.cart.index'),
         ]);
 
-        $publicKey = env('STRIPE_PUBLIC_KEY', compact('session', 'publicKey'));
+        $publicKey = env('STRIPE_PUBLIC_KEY');
 
-        return view('user.payment', compact(''));
+        return view('user.payment', compact('session', 'publicKey'));
     }
 }
