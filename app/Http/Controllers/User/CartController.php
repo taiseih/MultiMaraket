@@ -102,12 +102,6 @@ class CartController extends Controller
 
     public function success(){
 
-        // Cart::truncate();
-
-        // if(Cart::where('user_id', Auth::id())->delete()){
-        //     return redirect()->route('user.items.index');
-        // }
-
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('user.items.index');
