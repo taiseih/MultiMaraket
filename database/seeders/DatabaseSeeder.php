@@ -27,15 +27,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             OwnerSeeder::class,
-            ShopSeeder::class,
+            // ShopSeeder::class,
             CategorySeeder::class,
-            ImageSeeder::class,
+            // ImageSeeder::class,
             // ProductSeeder::class,
             // StockSeeder::class,
             UserSeeder::class,
         ]);
-        Product::factory(100)->create();
-        Stock::factory(100)->create();
+        // Product::factory(100)->create();
+        // Stock::factory(100)->create();
 
     }
 }
