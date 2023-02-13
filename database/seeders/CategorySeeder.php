@@ -21,11 +21,11 @@ class CategorySeeder extends Seeder
             'sort_order' => '1',
         ],
         [
-            'name' => '引っ越し祝い・ギフト',
+            'name' => '掃除用品',
             'sort_order' => '2',
         ],
         [
-            'name' => '家電',
+            'name' => '家電用品',
             'sort_order' => '3',
         ],
         ]);
@@ -46,17 +46,17 @@ class CategorySeeder extends Seeder
             'primary_category_id' => 1,
         ],
         [
-            'name' => 'ギフトセット',
+            'name' => '掃除機',
             'sort_order' => '1',
             'primary_category_id' => 2,
         ],
         [
-            'name' => '引っ越しセット',
+            'name' => 'マイクロファイバー',
             'sort_order' => '2',
             'primary_category_id' => 2,
         ],
         [
-            'name' => '掃除用具',
+            'name' => '掃除ブラシ',
             'sort_order' => '3',
             'primary_category_id' => 2,
         ],
