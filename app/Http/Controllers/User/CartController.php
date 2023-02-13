@@ -48,6 +48,8 @@ class CartController extends Controller
     }
 
     public function payment(){
+
+
         $user = User::findOrFail(Auth::id());
         $products = $user->product;
 
@@ -96,4 +98,19 @@ class CartController extends Controller
 
         return view('user.payment', compact('session', 'publicKey'));
     }
+
+
+    public function success(){
+
+        // Cart::truncate();
+
+        // if(Cart::where('user_id', Auth::id())->delete()){
+        //     return redirect()->route('user.items.index');
+        // }
+
+        Cart::where('user_id', Auth::id())->delete();
+
+        return redirect()->route('user.items.index');
+    }
+
 }
