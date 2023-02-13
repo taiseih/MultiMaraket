@@ -31,6 +31,7 @@ Route::prefix('cart')
     Route::post('/add', [CartController::class, 'add'])->name('cart.add');
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
     Route::post('destroy/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('payment', [CartController::class, 'payment'])->name('cart.payment');
     });
 
 
