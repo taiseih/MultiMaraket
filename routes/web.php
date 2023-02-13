@@ -33,6 +33,7 @@ Route::prefix('cart')
     Route::post('destroy/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::get('payment', [CartController::class, 'payment'])->name('cart.payment');
     Route::get('success', [CartController::class, 'success'])->name('cart.success');
+    Route::get('cancel', [CartController::class, 'cancel'])->name('cart.cancel');
     });
 
 
