@@ -41,7 +41,8 @@ class ItemController extends Controller
             'secondary_categories.name as category',
             'image1.filename as filename'
         )
-        ->get();
+        ->paginate(20);
+        
         return view('user.items.index', compact('products'));
     }
 
