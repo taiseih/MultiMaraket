@@ -17,11 +17,11 @@
                     <x-nav-link :href="route('owner.shops.index')" :active="request()->routeIs('owner.shops.index')">
                         {{ __('ショップ一覧') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('owner.images.index')" :active="request()->routeIs('owner.images.index')">
-                        {{ __('画像管理') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('owner.products.index')" :active="request()->routeIs('owner.products.index')">
                         {{ __('商品管理') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('owner.images.index')" :active="request()->routeIs('owner.images.index')">
+                        {{ __('画像管理') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -74,11 +74,11 @@
             <x-responsive-nav-link :href="route('owner.shops.index')" :active="request()->routeIs('owner.shops.index')">
                 {{ __('ショップ一覧') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('owner.images.index')" :active="request()->routeIs('owner.images.index')">
-                {{ __('画像管理') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('owner.products.index')" :active="request()->routeIs('owner.products.index')">
                 {{ __('商品管理') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('owner.images.index')" :active="request()->routeIs('owner.images.index')">
+                {{ __('画像管理') }}
             </x-responsive-nav-link>
         </div>
 
