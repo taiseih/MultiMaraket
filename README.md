@@ -19,4 +19,6 @@ storage/app/public/shopsフォルダを作成し
 
 <h2>swiper</h2>
 userの詳細画面でjsのライブラリのswiper.jsを使用しています。
+stripe決済について、決済自体が完了しリダイレクトの挙動は確認できるが、deleteメソッドが実行されない。原因模索中
+
 

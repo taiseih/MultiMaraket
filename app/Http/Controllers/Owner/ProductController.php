@@ -89,7 +89,7 @@ class ProductController extends Controller
                     'type' => 1,
                     'quantity' => $request->quantity
                 ]);
-            }, 2); //第二引数で繰り返し回数を指定する
+            }, 2);
 
         } catch (Throwable $e) {
             Log::error($e);
@@ -133,8 +133,6 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        $quantity = Stock::where('product_id', $product->id)
-            ->sum('quantity');
 
         try {
             DB::transaction(function () use ($request, $product) {
