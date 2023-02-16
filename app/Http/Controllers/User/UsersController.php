@@ -60,7 +60,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user =  User::findOrFail($id);
+
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -72,7 +74,14 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->save();
+
+        return redirect()->route('user.index')->with('message', 'ユーザー情報を更新しました');
     }
 
     /**

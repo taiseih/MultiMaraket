@@ -36,7 +36,7 @@
                               <td class="md:px-4 py-3">{{ $users->address }}</td>
                               <td class="md:px-4 py-3">{{ $users->created_at->diffForHumans() }}</td>
                               <td class="w-28">
-                                {{-- <button onclick="location.href='{{ route('user.edit', ['user' => $users->id ])}}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-500 rounded ">編集する</button>                                                      </td> --}}
+                                <button onclick="location.href='{{ route('user.edit', ['user' => $users->id ])}}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-500 rounded ">編集する</button>                                                      </td>
                              </td>
                           </tr>
                           </tbody>

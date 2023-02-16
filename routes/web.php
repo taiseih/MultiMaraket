@@ -23,6 +23,8 @@ Route::get('/', function () {
 Route::middleware('auth:users')
 ->group(function () {
     Route::get('/user', [UsersController::class, 'index'])->name('index');
+    Route::get('/{user}/edit', [UsersController::class, 'edit'])->name('edit');
+    Route::put('/{user}', [UsersController::class, 'update'])->name('update');
 });
 
 Route:: middleware('auth:users')
