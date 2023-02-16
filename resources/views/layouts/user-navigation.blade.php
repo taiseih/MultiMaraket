@@ -20,6 +20,9 @@
                     <x-nav-link :href="route('user.cart.index')" :active="request()->routeIs('user.cart.index')">
                         {{ __('カート') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                        {{ __('ユーザー情報') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -73,6 +76,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('user.cart.index')" :active="request()->routeIs('user.cart.index')">
                 {{ __('カート') }}
+            </x-responsive-nav-link>
+             <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                {{ __('ユーザー情報') }}
             </x-responsive-nav-link>
         </div>
 
