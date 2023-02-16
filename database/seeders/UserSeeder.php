@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
                 'name' => 'ユーザー1',
                 'email' => 'user0@user.com',
                 'password' => Hash::make('password123'),
+                'address' => '埼玉県春日部市〇〇町1-1-1',
                 'created_at' => '2023/1/1 11:11:11'
             ]
             ]);

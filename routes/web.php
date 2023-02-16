@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ItemController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,11 @@ use App\Http\Controllers\User\CartController;
 
 Route::get('/', function () {
     return view('user.welcome');
+});
+
+Route::middleware('auth:users')
+->group(function () {
+    Route::get('/user', [UsersController::class, 'index'])->name('index');
 });
 
 Route:: middleware('auth:users')
