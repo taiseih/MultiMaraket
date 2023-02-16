@@ -36,7 +36,7 @@
                       小計: {{ number_format($totalPrice)}}<span class="text-sm text-gray-700">円(税込)</span>
                     </div>
                         <div>
-                            <button onclick="location.href='{{ route('user.cart.payment') }}'" class="w-full m-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">購入する</button>
+                            <button onclick="@if($user->address)location.href='{{ route('user.cart.payment') }}' @else userAddress() @endif" class="w-full m-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">購入する</button>
                         </div>
                     @else
                         カートに商品が入っていません
@@ -45,4 +45,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function userAddress() {
+            let address = confirm("発送先住所が登録されていません、登録をお願いします");
+            if (address == true){
+            location.href = "{{route('user.index')}}";
+        }
+        }
+</script>
 </x-app-layout>
