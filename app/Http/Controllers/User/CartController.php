@@ -19,7 +19,7 @@ class CartController extends Controller
         foreach($products as $product){
             $totalPrice += $product->price * $product->pivot->quantity;//pivotで中間テーブルのcartsの数量を取得
         }
-        return view('user.cart', compact('totalPrice', 'products'));
+        return view('user.cart', compact('totalPrice', 'products', 'user'));
     }
     
     public function add(Request $request){
