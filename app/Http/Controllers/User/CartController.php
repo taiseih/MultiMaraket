@@ -8,6 +8,8 @@ use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class CartController extends Controller
 {
@@ -36,13 +38,26 @@ class CartController extends Controller
             $cartItem->quantity += $request->quantity;
             $cartItem->save();
         }
-        return redirect()->route('user.cart.index');
+        return redirect()->route('user.items.index');
     }
 
     public function destroy($id) {
-        Cart::where('product_id', $id)
-        ->where('user_id', Auth::id())
-        ->delete();
+        
+        $cartItemValue = Cart::value('quantity');
+        $cartItem = (int)$cartItemValue;
+
+            if($cartItem > 1){
+                Cart::where('product_id', $id)
+                ->where('user_id', Auth::id())
+                ->decrement('quantity');
+            }else{
+                Cart::where('product_id', $id)
+                ->where('user_id', Auth::id())
+                ->delete();
+            }
+        
+
+        
 
         return redirect()->route('user.cart.index');
     }
