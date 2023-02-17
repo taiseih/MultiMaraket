@@ -6,7 +6,10 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <div class="w-12">
-                    <a href="{{ route('user.items.index') }}">
+                    <a href="{{ route('user.cart.index') }}">
+                        @if($cartQuantity)
+                        <span class="text-white bg-red-400 rounded-full absolute ml-50 w-24 flex items-center justify-center">{{$cartQuantity}}</span>
+                        @endif
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                     </div>
@@ -16,9 +19,6 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.items.index')" :active="request()->routeIs('user.items.index')">
                         {{ __('商品') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('user.cart.index')" :active="request()->routeIs('user.cart.index')">
-                        {{ __('カート') }}
                     </x-nav-link>
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
                         {{ __('ユーザー情報') }}
@@ -73,9 +73,6 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('user.items.index')" :active="request()->routeIs('user.items.index')">
                 {{ __('商品') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('user.cart.index')" :active="request()->routeIs('user.cart.index')">
-                {{ __('カート') }}
             </x-responsive-nav-link>
              <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
                 {{ __('ユーザー情報') }}
