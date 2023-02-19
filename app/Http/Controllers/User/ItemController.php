@@ -20,28 +20,7 @@ class ItemController extends Controller
 
     public function index(){
 
-        $stocks = DB::table('t_stocks')->select('product_id', DB::raw('sum(quantity) as quantity'))
-        ->groupBy('product_id')->having('quantity', '>', 1);
-
-        $products = DB::table('products')
-        ->joinSub($stocks, 'stock', function($join){
-            $join->on('products.id', '=', 'stock.product_id');
-        })
-        ->join('shops', 'products.shop_id', '=', 'shops.id')
-        ->join('secondary_categories', 'products.secondary_category_id', '=', 'secondary_categories.id')
-        ->join('images as image1', 'products.image1', '=', 'image1.id')
-        ->where('shops.is_selling', true)//ショップが販売中かどうか
-        ->where('products.is_selling', true) //商品が販売中かどうか
-        ->select(
-            'products.id as id',
-            'products.name as name',
-            'products.price',
-            'products.sort_order as sort_order',
-            'products.information',
-            'secondary_categories.name as category',
-            'image1.filename as filename'
-        )
-        ->paginate(20);
+        $products = Product::DisplayItems()->paginate(20);
         
         return view('user.items.index', compact('products'));
     }
