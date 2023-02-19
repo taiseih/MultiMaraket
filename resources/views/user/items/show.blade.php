@@ -86,7 +86,23 @@
                                 <button class="w-full m-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">カートに入れる</button>
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                               </form>
+                             
                           </div>
+                            @if (auth()->check())
+                                @if ($userLike)
+                                    <button id="like-button-{{$product->id}}" class="text-red-400" onclick="dislike({{$product->id}})"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                      </svg>
+                                    </button>
+                                @else
+                                    <button id="like-button-{{$product->id}}" class="" onclick="like({{$product->id}})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                        </svg>
+                                    </button>
+                                @endif
+                            @endif
                     </div>
                 </div>
             </div>
@@ -128,4 +144,52 @@
   </div>
 
     <script src="{{ mix('js/swiper.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script>
+  function like(productId) {
+    $.ajax({
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+      },
+      url: `/like/${productId}`,
+      type: "POST",
+    })
+      .done(function (data, status, xhr) {
+        updateLikeButton(productId, data.likesCount);
+        console.log('いいねしました')
+      })
+      .fail(function (xhr, status, error) {
+        console.log('false');
+      });
+  }
+
+  function dislike(productId) {
+    $.ajax({
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+      },
+      url: `/dislike/${productId}`,
+      type: "POST",
+    })
+      .done(function (data, status, xhr) {
+        console.log('いいねを解除しました')
+        updateLikeButton(productId, data.likesCount);
+      })
+      .fail(function (xhr, status, error) {
+        console.log('false');
+      });
+  }
+
+  function updateLikeButton(productId, likesCount) {
+    const likeButton = $("#like-button-" + productId);
+
+
+    if (likeButton.hasClass("text-red-400")) {
+      likeButton.removeClass("text-red-400");
+    } else {
+      likeButton.addClass("text-red-400");
+    }
+  }
+</script>
 </x-app-layout>

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ItemController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\UsersController;
+use App\Http\Controllers\User\LikeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,9 @@ use App\Http\Controllers\User\UsersController;
 Route::get('/', function () {
     return view('user.welcome');
 });
+
+Route::post('/like/{productId}', [LikeController::class, 'store']);
+Route::post('/dislike/{productId}', [LikeController::class, 'destroy']);
 
 Route::middleware('auth:users')
 ->group(function () {

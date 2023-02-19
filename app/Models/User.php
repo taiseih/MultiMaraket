@@ -47,4 +47,30 @@ class User extends Authenticatable
     public function product(){
         return $this->belongsToMany(Product::class, 'carts')->withPivot(['id', 'quantity']);//中間テーブル名を変えたい時はテーブル名ごと変える)
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Product::class, 'likes')->withPivot(['user_id', 'product_id'])->withTimestamps();//中間テーブルにlikes、多対多のリレーション
+    }
+
+    public function isLike($productId)
+    {
+        return $this->likes()->where('product_id', $productId)->exists();
+    }
+
+    public function like($productId)
+    {
+        if (!$this->isLike($productId)) {
+            $this->likes()->attach($productId);
+        }
+    }
+
+
+    public function disLike($productId)
+    {
+        if ($this->isLike($productId)) { //いいねしていたら消す
+            $this->likes()->detach($productId);
+        } else {
+        }
+    }
 }
