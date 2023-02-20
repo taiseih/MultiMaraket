@@ -9,6 +9,7 @@ use App\Models\SecondaryCategory;
 use App\Models\Image;
 use App\Models\Stock;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Product extends Model
@@ -92,5 +93,25 @@ class Product extends Model
                 'secondary_categories.name as category',
                 'image1.filename as filename'
             );
+    }
+
+    public function scopeSortOrder($query, $sortOrder){
+
+        if ($sortOrder === null || $sortOrder === \Constant::SORT_ORDER['recommend']) {
+            return $query->orderBy('sort_order', 'asc');
+        }
+        if ($sortOrder === \Constant::SORT_ORDER['higherPrice']) {
+            return $query->orderBy('price', 'desc');
+        }
+        if ($sortOrder === \Constant::SORT_ORDER['lowerPrice']) {
+            return $query->orderBy('price', 'asc');
+        }
+        if ($sortOrder === \Constant::SORT_ORDER['newerItem']) {
+            return $query->orderBy('products.created_at', 'desc');
+        }
+        if ($sortOrder === \Constant::SORT_ORDER['olderItem']) {
+            return $query->orderBy('products.created_at', 'asc');
+        }
+
     }
 }
