@@ -9,7 +9,7 @@
                     <a href="{{ route('user.cart.index') }}">
                         @if(Auth::user())
                         @if($cartQuantity)
-                        <span class="text-white bg-red-400 rounded-full absolute ml-50 w-24 flex items-center justify-center">{{$cartQuantity}}</span>
+                        <span class="text-white bg-red-400 rounded-full absolute ml-12 w-6 flex items-center justify-center">{{$cartQuantity}}</span>
                         @endif
                         @endif
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
