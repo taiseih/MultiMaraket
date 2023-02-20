@@ -21,9 +21,12 @@ use App\Http\Controllers\User\LikeController;
 Route::get('/', function () {
     return view('user.welcome');
 });
-
-Route::post('/like/{productId}', [LikeController::class, 'store']);
-Route::post('/dislike/{productId}', [LikeController::class, 'destroy']);
+Route::middleware('auth:users')
+    ->group(function () {
+    Route::get('/user/like', [LikeController::class, 'index'])->name('likes.index');
+    Route::post('/like/{productId}', [LikeController::class, 'store']);
+    Route::post('/dislike/{productId}', [LikeController::class, 'destroy']);
+});
 
 Route::middleware('auth:users')
 ->group(function () {
