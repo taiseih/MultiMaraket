@@ -1,8 +1,48 @@
 <x-app-layout>
     <x-slot name="header">
+        <div class="flex justify-between items-center">
+
+        
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('ホーム') }}
+            {{ __('商品一覧') }}
         </h2>
+        <div>
+            <form action="{{ route('user.items.index') }}" method="get">
+                <div class="flex">
+                    <div>
+                            <span class="text-sm">表示順</span><br>
+                            <select id="sort" name="sort" class="mr-4">
+                                <option value="{{ \Constant::SORT_ORDER['recommend']}}"
+                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['recommend'] ) 
+                                    selected 
+                                    @endif>おすすめ順
+                                </option>
+                                <option value="{{ \Constant::SORT_ORDER['higherPrice']}}" 
+                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['higherPrice'] ) 
+                                    selected 
+                                    @endif>料金の高い順
+                                </option>
+                                <option value="{{ \Constant::SORT_ORDER['lowerPrice']}}"
+                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['lowerPrice'] ) 
+                                    selected 
+                                    @endif>料金の安い順    
+                                </option>
+                                <option value="{{ \Constant::SORT_ORDER['newerItem']}}"
+                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['newerItem'] ) 
+                                    selected 
+                                    @endif>新しい順
+                                </option>
+                                <option value="{{ \Constant::SORT_ORDER['olderItem']}}"
+                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['olderItem'] ) 
+                                    selected 
+                                    @endif>古い順
+                                </option>
+                            </select>
+                        </div>
+                </div>
+            </form>
+        </div>
+        </div>
     </x-slot>
 <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -29,10 +69,14 @@
                             </div>
                         @endforeach
                     </div>
-                    {{$products->links()}}
                 </div>
             </div>
         </div>
     </div>
-    
+    <script>
+        const select = document.getElementById('sort');
+        select.addEventListener('change', function(){
+            this.form.submit()
+        });
+    </script>
 </x-app-layout>

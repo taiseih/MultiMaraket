@@ -18,9 +18,11 @@ class ItemController extends Controller
         $this->middleware('auth:users');
     }
 
-    public function index(){
+    public function index(Request $request){
 
-        $products = Product::DisplayItems()->paginate(20);
+        $products = Product::displayItems()
+        ->sortOrder($request->sort)
+        ->get();
         
         return view('user.items.index', compact('products'));
     }

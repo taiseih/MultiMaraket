@@ -156,7 +156,7 @@
       type: "POST",
     })
       .done(function (data, status, xhr) {
-        updateLikeButton(productId, data.likesCount);
+        updateLikeButton(productId);
         console.log('いいねしました')
       })
       .fail(function (xhr, status, error) {
@@ -174,14 +174,14 @@
     })
       .done(function (data, status, xhr) {
         console.log('いいねを解除しました')
-        updateLikeButton(productId, data.likesCount);
+        updateLikeButton(productId);
       })
       .fail(function (xhr, status, error) {
         console.log('false');
       });
   }
 
-  function updateLikeButton(productId, likesCount) {
+  function updateLikeButton(productId) {
     const likeButton = $("#like-button-" + productId);
 
 
