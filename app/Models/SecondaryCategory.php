@@ -9,6 +9,14 @@ use App\Models\PrimaryCategory;
 class SecondaryCategory extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'sort_order',
+        'primary_category_id',
+    ];
+
+
     public function primary()
     {
         return $this->belongsTo(PrimaryCategory::class);//一対一のリレーション 参照元

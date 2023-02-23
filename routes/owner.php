@@ -9,12 +9,11 @@ use App\Http\Controllers\Owner\Auth\NewPasswordController;
 use App\Http\Controllers\Owner\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Owner\Auth\RegisteredUserController;
 use App\Http\Controllers\Owner\Auth\VerifyEmailController;
+use App\Http\Controllers\Owner\CategoryController;
 use App\Http\Controllers\Owner\ShopController;
 use App\Http\Controllers\Owner\ImageController;
 use App\Http\Controllers\Owner\ProductController;
-
-
-
+use Database\Seeders\CategorySeeder;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +28,17 @@ use App\Http\Controllers\Owner\ProductController;
 
 Route::get('/', function () {
     return view('owner.welcome');
+});
+
+Route::prefix('categories') //prefixはrouteServiceProviderで指定してるadminが先頭に入ってる
+->middleware('auth:owners')
+->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('prime/create', [CategoryController::class, 'prime_create'])->name('categories.prime.create');
+    Route::get('second/create', [CategoryController::class, 'second_create'])->name('categories.second.create');
+    Route::post('/', [CategoryController::class, 'prime_store'])->name('categories.prime.store');
+    Route::post('/', [CategoryController::class, 'second_store'])->name('categories.second.store');
+
 });
 
 Route::prefix('shops') //prefixはrouteServiceProviderで指定してるadminが先頭に入ってる
