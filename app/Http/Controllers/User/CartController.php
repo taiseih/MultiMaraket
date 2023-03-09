@@ -43,7 +43,8 @@ class CartController extends Controller
 
     public function destroy($id) {
         
-        $cartItemValue = Cart::value('quantity');
+        $cartItemValue = Cart::where('product_id', $id)
+            ->where('user_id', Auth::id())->value('quantity');
         $cartItem = (int)$cartItemValue;
 
             if($cartItem > 1){
